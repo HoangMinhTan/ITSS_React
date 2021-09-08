@@ -1,23 +1,41 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { useState } from 'react';
+import useCustomHook from './useHook';
 
 function App() {
+  const [names,printName, add, putNames] =  useCustomHook();
+  const [text, setText] = useState('');
+
+
+  const handleChange = (e) => {
+    setText(e.target.value);
+  }
+
+  const handleClick = () => {
+    putNames(names);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <p>学生一覧：[{printName}]</p> 
+      <p>追加した名前を入力してください。</p>
+      <input
+        class="input"
+        type="text"
+        onChange={handleChange}
+      />
+
+      <button
+        className = "button"
+        onClick = {handleClick}
+      >
+        確定
+      </button>
+
+      <p>追加した名前：{text}</p>
+      <p>新しい一覧：</p>
+
     </div>
   );
 }
